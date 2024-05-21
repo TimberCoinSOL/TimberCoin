@@ -63,22 +63,18 @@ function onReady() {
     loadProgress++;
 
     if (loadProgress == countSprites) {
-
-        // Changement du point d'ancrage du bucheron et ajout des animations
         anchorSprite(man, 0.5, 0.5);
         man.x = 263;
 
         addAnimation(man, "breath", [2, 3], 527, 413, 350);
         addAnimation(man, "cut", [0, 1, 0], 527, 413, 15);
 
-        // Creation de l'arbre
         trunk1.data = "trunk1";
         branchleft.data = "branchleft";
         branchright.data = "branchright";
 
         initTrunk();
 
-        // Creation des image représentant chaque chiffre 
         clipSprite(number[0], 5, 5, 66, 91);
         clipSprite(number[1], 81, 5, 50, 91);
         clipSprite(number[2], 141, 5, 66, 91);
@@ -90,24 +86,18 @@ function onReady() {
         clipSprite(number[8], 597, 5, 66, 91);
         clipSprite(number[9], 673, 5, 66, 91);
 
-        // Position niveau load
         level = levelLoad;
 
-        // Mémorisation du meilleurs scrore
         if (localStorage.bestscore) {
             bestscore = Number(localStorage.bestscore);
         }
 
-        // Visualisation du jeu
         renderGame();
     }
 }
 
 function initTrunk() {
     trunk = [0, 0, 0, 0, 0, 0, 0];
-    // Construction des branches
-    // Il ne faut pas qu’une branche apparaisse sur le personnage directement après avoir lancé le jeu.
-    // ==> il faut placer 2 troncs sans branches dès le début
     trunk[0] = copySprite(trunk1);
     trunk[1] = copySprite(trunk1);
     addTrunk();
@@ -119,16 +109,10 @@ function initTrunk() {
 
 function addTrunk() {
     for (var i = 1; i < 7; i++) {
-        // Si pas de tronçon
         if (trunk[i] === 0) {
-            // Il ne peut pas y avoir 2 branches à la suite.
-            // => le troncon précédent doit etre un tronc
             if (trunk[i - 1].data == "trunk1") {
-                // 1 chance sur 4 de placer un tronc sans branche
                 if (Math.random() * 4 <= 1) {
                     trunk[i] = copySprite(trunk1);
-
-                    // 3 chances sur 4 de placer une branche    
                 } else {
                     if (Math.random() * 2 < 1) {
                         trunk[i] = copySprite(branchleft);
@@ -136,8 +120,6 @@ function addTrunk() {
                         trunk[i] = copySprite(branchright);
                     }
                 }
-                // Le troncon précédent n'est pas un tronc 
-                // ==> On place un tronc
             } else {
                 trunk[i] = copySprite(trunk1);
             }
