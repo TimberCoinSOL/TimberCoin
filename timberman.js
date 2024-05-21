@@ -225,17 +225,10 @@ function renderGame() {
     for (var i = 0; i < score.toString().length; i++) {
         p = score.toString().substring(i, i + 1);
         m = gameAreaX + screenWidth() / 2 - 35 * score.toString().length;
-        displaySprite(number[p], m + 67 * i, 700);
+        displaySprite(number[p], m + 67 * i, 220);
     }
 
-    // Animation status
-    if (animationActive(man, "cut") === false) {
-        playAnimation(man, "breath");
-    } else {
-        playAnimation(man, "cut");
-    }
-
-    // Evenements clavier et souris 
+    // Events clavier et souris 
     if (keyboardReleased(KEY_LEFT) && level != levelGameOver) {
         man.data = "left";
         man.x = 263;
