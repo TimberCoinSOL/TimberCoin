@@ -1,5 +1,3 @@
-// TimberMan - Clone of http://www.digitalmelody.eu/games/Timberman
-
 // Load Progress 
 var loadProgress = 0, countSprites = 25;
 
@@ -81,7 +79,7 @@ function onReady() {
 		
 		initTrunk();
 		
-		// Creation des image reprÈsentant chaque chiffre 
+		// Creation des image repr√©sentant chaque chiffre 
 		clipSprite(number[0], 5, 5, 66, 91); 		
 		clipSprite(number[1], 81, 5, 50, 91); 		
 		clipSprite(number[2], 141, 5, 66, 91); 		
@@ -96,7 +94,7 @@ function onReady() {
 		// Position niveau load
 		level = levelLoad;
 		
-		// MÈmorisation du meilleurs scrore
+		// M√©morisation du meilleurs scrore
 		if (localStorage.bestscore) {
 			bestscore = Number(localStorage.bestscore);
 		}
@@ -109,8 +107,8 @@ function onReady() {
 function initTrunk() {
 	trunk = [0, 0, 0, 0, 0, 0, 0]
 	// Construction des branches
-	// Il ne faut pas quíune branche apparaisse sur le personnage directement aprËs avoir lancÈ le jeu.
-	// ==> il faut placer 2 troncs sans branches dËs le dÈbut
+	// Il ne faut pas qu‚Äôune branche apparaisse sur le personnage directement apr√®s avoir lanc√© le jeu.
+	// ==> il faut placer 2 troncs sans branches d√®s le d√©but
 	trunk[0] = copySprite(trunk1);
 	trunk[1] = copySprite(trunk1);
 	addTrunk();
@@ -122,10 +120,10 @@ function initTrunk() {
 
 function addTrunk() {	
 	for(var i = 1; i < 7; i++) {
-		// Si pas de tronÁon
+		// Si pas de tron√ßon
 		if (trunk[i] === 0) {
-			// Il ne peut pas y avoir 2 branches ‡ la suite.
-			// => le troncon prÈcÈdent doit etre un tronc
+			// Il ne peut pas y avoir 2 branches √† la suite.
+			// => le troncon pr√©c√©dent doit etre un tronc
 			if (trunk[i-1].data == "trunk1") {
 				// 1 chance sur 4 de placer un tronc sans branche
 				if(Math.random() * 4 <= 1) {			
@@ -139,7 +137,7 @@ function addTrunk() {
 						trunk[i] = copySprite(branchright);
 					}
 				}
-			// Le troncon prÈcÈdent n'est pas un tronc 
+			// Le troncon pr√©c√©dent n'est pas un tronc 
 			// ==> On place un tronc
 			} else {
 				trunk[i] = copySprite(trunk1);	
@@ -292,7 +290,7 @@ function renderGame() {
 			gameOver()
 		} 
 				
-		// Mise ‡ jour du scrore 
+		// Mise √† jour du scrore 
 		score++;
 		if (score % 20 == 0 ) {
 			levelscore ++;
@@ -302,18 +300,18 @@ function renderGame() {
 			timescore += 10;
 		}
 			
-		// Chaque tronÁon de l'arbre descend d'un niveau
+		// Chaque tron√ßon de l'arbre descend d'un niveau
 		for(var i = 0; i < 6; i++) {
 			trunk[i] = trunk[i+1];	
 		}	
 				
-		// Suppression du tronÁon le plus haut
+		// Suppression du tron√ßon le plus haut
 		trunk[6] = 0;
 				
-		// Ajout d'un nouveau tronÁon
+		// Ajout d'un nouveau tron√ßon
 		addTrunk();										
 				
-		// Une fois le tronc coupÈ, on vÈrifie si le tronc qui retombe n'est pas une branche qui pourrait heurter le bucheron
+		// Une fois le tronc coup√©, on v√©rifie si le tronc qui retombe n'est pas une branche qui pourrait heurter le bucheron
 		if (man.data == "left" && trunk[0].data == "branchleft" || man.data == "right" && trunk[0].data == "branchright") {
 			gameOver();
 		} 	
